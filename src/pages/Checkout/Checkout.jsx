@@ -1,9 +1,9 @@
 import { Container, Grid } from "semantic-ui-react";
-import "./Home.css"
+import "./Checkout.css"
 import Product from "../../components/Product/Product";
 import reactLogo from "../../assets/react.svg";
 import Navbar from "../../components/Navbar/Navbar";
-function Home() {
+function Checkout() {
     
     return (
         <div className="home">
@@ -11,8 +11,9 @@ function Home() {
             <Container>
                 <Grid divided>
                     <Grid.Row>
-                        {[...Array(4)].map((product, index) => {
+                        {[...Array(1)].map((product, index) => {
                         return (
+                            <Grid.Row>
                             <Grid.Column stretched key={index}>
                                 <Product
                                     id={index}
@@ -23,7 +24,7 @@ function Home() {
                                     image={reactLogo}
                                 ></Product>
                             </Grid.Column>
-                            
+                            </Grid.Row>
                         );
                         })}
                     </Grid.Row>
@@ -35,4 +36,4 @@ function Home() {
 
     );
 }
-export default Home;
+export default Checkout;

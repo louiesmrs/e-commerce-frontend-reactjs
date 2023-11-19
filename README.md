@@ -5,6 +5,7 @@ Runs on http://localhost:5173/
 Must have Node.js
 
 First step: Run "npm install"
+
 Second step: Run "npm run dev"
 
 
