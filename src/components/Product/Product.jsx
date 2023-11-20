@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 function Product( {id, title, price, rating, image}) {
     return (
         <div className="product">
-             <Link to='/product/${title}'>
+             
                 <Card className="product__card">
+                    <Link to='/product/${title}'>
                     <Image className="product__image" centered src={image} />
                     <Card.Content>
                     <Card.Header className="product__title">{title}</Card.Header>
@@ -16,13 +17,14 @@ function Product( {id, title, price, rating, image}) {
                         <span className="product__price">${price}</span>
                     </Card.Description>
                     </Card.Content>
+                    </Link>
                     <Card.Content extra className="product__footer">
                     <Button inverted className="product__button">
                         ADD TO BASKET
                     </Button>
                     </Card.Content>
                 </Card>
-          </Link>
+      
         </div>
 
       );

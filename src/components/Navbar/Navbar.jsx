@@ -1,7 +1,7 @@
 
 import "./Navbar.css"
 import { Link } from 'react-router-dom';
-import reactLogo from "../../assets/react.svg";
+
 function Navbar( {image}) {
     return (
     <nav className='nav'>
@@ -10,12 +10,19 @@ function Navbar( {image}) {
         </Link>
         <h3 className='nav-header'>Sweng Group 27</h3>
         <ul className='nav-items'>
-            <li>About</li>
-            <li>Contact</li>
+            <li>
+                <Link to="/Login">
+                    Login
+                </Link>
+                </li>
+            <li>
+            <Link to="/Contact">
+                Contact
+            </Link></li>
         </ul>
         <div className="navbar-right">
             <Link to="/checkout">
-            <img src={reactLogo}></img>
+                <img src={image} />
             </Link>
       </div>
     </nav>
