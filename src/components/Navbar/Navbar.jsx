@@ -1,28 +1,36 @@
 
 import "./Navbar.css"
 import { Link } from 'react-router-dom';
+import {
+    HomeOutlined,
+    ShoppingCartOutlined,
+    PhoneOutlined 
+} from '@ant-design/icons';
 
-function Navbar( {image}) {
+function Navbar() {
     return (
     <nav className='nav'>
         <Link to="/home">
-            <img src={image} className='nav-logo' />
+            <HomeOutlined style={{ fontSize: '250%'}} />
         </Link>
         <h3 className='nav-header'>Sweng Group 27</h3>
         <ul className='nav-items'>
             <li>
                 <Link to="/Login">
-                    Login
+                    Login/
+                </Link>
+                <Link to="/Register">
+                    Register
                 </Link>
                 </li>
             <li>
             <Link to="/Contact">
                 Contact
-            </Link></li>
+            </Link><PhoneOutlined /></li>
         </ul>
         <div className="navbar-right">
             <Link to="/checkout">
-                <img src={image} />
+                <ShoppingCartOutlined style={{ fontSize: '250%'}}/>
             </Link>
       </div>
     </nav>

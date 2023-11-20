@@ -21,11 +21,13 @@
     padding: 10px;
     font-size: 30px;
     color: white;
+    margin-right: 5px;
   }
   
   
   .nav-header {
     margin-right: auto;
+    margin-left: 5px;
     color: #61DAFB;
     font-weight: 700;
     font-size: 40px;

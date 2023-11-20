@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Message } from "semantic-ui-react";
 import axios from "axios";
-
-export const UseForm = (validate) => {
+import { notification } from "antd";
+export const useForm = (validate) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [shouldSubmit, setShouldSubmit] = useState(false);
 
   const openNotificationWithIcon = () => {
-    Message["success"]({
+    notification.open({
       message: "Success",
       description: "Your message has been sent!",
     });
@@ -18,7 +18,7 @@ export const UseForm = (validate) => {
     event.preventDefault();
     setErrors(validate(values));
     // Your url for API
-    const url = "";
+    const url = "http://localhost:8080";
     if (Object.keys(values).length === 3) {
       axios
         .post(url, {
@@ -26,12 +26,16 @@ export const UseForm = (validate) => {
         })
         .then(() => {
           setShouldSubmit(true);
-        });
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+          });
     }
   };
 
   useEffect(() => {
-    if (Object.keys(errors).length === 0 && shouldSubmit) {
+    if (errors.message === "" && errors.message === "" && errors.email === "" && errors.password === "" && shouldSubmit) {
       setValues("");
       openNotificationWithIcon();
     }

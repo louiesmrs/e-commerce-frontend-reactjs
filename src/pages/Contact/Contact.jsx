@@ -1,13 +1,12 @@
 
-import { UseForm } from "../../utils/UseForm";
+import { useForm } from "../../utils/useForm";
 import validate from "../../utils/ValidateContact";
 import { Container, Grid, Button} from "semantic-ui-react";
 import "./Contact.css"
 import Navbar from "../../components/Navbar/Navbar";
-import reactLogo from "../../assets/react.svg";
 
 const Contact = () => {
-  const { values, errors, handleChange, handleSubmit } = UseForm(
+  const { values, errors, handleChange, handleSubmit } = useForm(
     validate
   );
 
@@ -22,17 +21,13 @@ const Contact = () => {
 
   return (
     <>
-        <Navbar image={reactLogo} />
+        <Navbar />
         <Container>
         <Grid divided>
         <Grid.Row justify="space-between" align="middle">
-        {
-            //     <Grid.Column lg={12} md={11} sm={24} xs={24}>
-            //     <Block title={title} content={content} />
-            // </Grid.Column>
-}   
+        <h3>Contact Form</h3>
             <Grid.Column >
-                <form autoComplete="off" onSubmit={handleSubmit}>
+                <form autoComplete="off" >
                 <Grid.Column span={24}>
                     <input
                     type="text"
@@ -62,7 +57,7 @@ const Contact = () => {
                     />
                     <ValidationType type="message" />
                 </Grid.Column>
-                <Button name="submit">{"Submit"}</Button>
+                <Button name="submit" onClick={handleSubmit}>{"Submit"}</Button>
                 </form>
             </Grid.Column>
         </Grid.Row>

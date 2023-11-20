@@ -1,12 +1,16 @@
 
-import { UseForm } from "../../utils/UseForm";
+import { useForm } from "../../utils/useForm";
 import validate from "../../utils/ValidateLogin";
-import { Container, Grid, Button} from "semantic-ui-react";
+import { Container, Grid, Button, Form, Icon} from "semantic-ui-react";
 import Navbar from "../../components/Navbar/Navbar";
-import reactLogo from "../../assets/react.svg";
+import './Login.css'
+import {
+  LoginOutlined
+} from '@ant-design/icons';
+
 
 const Login = () => {
-  const { values, errors, handleChange, handleSubmit } = UseForm(
+  const { values, errors, handleChange, handleSubmit } = useForm(
     validate
   );
 
@@ -21,12 +25,12 @@ const Login = () => {
 
   return (
     <>
-        <Navbar image={reactLogo} />
+        <Navbar />
         <Container>
         <Grid divided>
         <Grid.Row justify="space-between" align="middle">
             <Grid.Column >
-                <form autoComplete="off" onSubmit={handleSubmit}>
+                <form autoComplete="off" >
                 <Grid.Column span={24}>
                     <input
                     type="text"
@@ -45,9 +49,11 @@ const Login = () => {
                     value={values.password || ""}
                     onChange={handleChange}
                     />
+                    <p>Passwords must contain 1 number and 1 special character</p>
                     <ValidationType type="password" />
                 </Grid.Column>
-                <Button name="submit">{"Submit"}</Button>
+                <Button className="submit" onClick={handleSubmit}>{"Submit"}</Button>
+                <LoginOutlined />
                 </form>
             </Grid.Column>
         </Grid.Row>

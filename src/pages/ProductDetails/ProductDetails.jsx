@@ -12,7 +12,7 @@ function ProductDetails() {
     
     return (
         <div className="home">
-            <Navbar image={reactLogo}/>
+            <Navbar />
             <div className="product-detail-container">
                 <div className="product-image-container">
                     <img src={reactLogo} alt="Product" />

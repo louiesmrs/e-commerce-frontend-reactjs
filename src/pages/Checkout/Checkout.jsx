@@ -7,7 +7,7 @@ function Checkout() {
     
     return (
         <div className="home">
-            <Navbar image={reactLogo}/>
+            <Navbar />
             <Container>
                 <Grid divided>
                     <Grid.Row>

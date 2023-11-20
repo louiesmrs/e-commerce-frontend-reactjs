@@ -1,23 +1,45 @@
-import { useState } from "react";
 
-export default function ValidateContact({ email, name, message}) {
-    const [errors, setErrors] = useState(
-        {
-            email: '',
-            name: "",
-            message: ""
-        }
-    )
+
+function ValidateContact({ email, name, message}) {
+
+    let errorsList = {
+        email: '',
+        name: '',
+        message:''
+    };
     if (!name) {
-        setErrors({...errors, name: "Name is required"});
+        errorsList.name = "Name is required";
       }
       if (!email) {
-        setErrors({...errors, email: "Email address is required"});
+        errorsList.email = "Email address is required";
       } else if (!/\S+@\S+\.\S+/.test(email)) {
-        setErrors({...errors, email: "Email address is invalid"});
+        errorsList.email = "Email address is Invalid";
       }
       if (!message) {
-        setErrors({...errors, message: "Message is required"});
+        errorsList.message = "Message is required";
       }
-      return errors;
+      return errorsList;
 }
+
+export default ValidateContact;
+
+// function ValidateContact({ email, name, message}) {
+//     const [errors, setErrors] = useState(
+//        []
+//     );
+//     let errorsList = {}
+//     if (!name) {
+//         setErrors({...errors, name: "Name is required"});
+//       }
+//       if (!email) {
+//         setErrors({...errors, email: "Email address is required"});
+//       } else if (!/\S+@\S+\.\S+/.test(email)) {
+//         setErrors({...errors, email: "Email address is invalid"});
+//       }
+//       if (!message) {
+//         setErrors({...errors, message: "Message is required"});
+//       }
+//       return errors;
+// }
+
+// export default ValidateContact;
