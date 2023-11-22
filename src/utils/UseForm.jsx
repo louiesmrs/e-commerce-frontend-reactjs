@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Message } from "semantic-ui-react";
 import axios from "axios";
 import { notification } from "antd";
 export const useForm = (validate) => {
@@ -18,7 +17,7 @@ export const useForm = (validate) => {
     event.preventDefault();
     setErrors(validate(values));
     // Your url for API
-    const url = "http://localhost:8080";
+    const url = "http://localhost:8080/contact";
     if (Object.keys(values).length === 3) {
       axios
         .post(url, {

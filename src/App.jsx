@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense } from 'react'
 
 import './App.css'
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
@@ -10,8 +10,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 function App() {
   return (
-    <>
-      <Router>
+    <Suspense fallback={null}>
         <Routes>
           <Route path="*" element={<Home />} />
           <Route path="/home" element={<Home />}></Route>
@@ -20,13 +19,9 @@ function App() {
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/Login" element={<Login />}></Route>
           <Route path="/Register" element={<Register />}></Route>
-          {
-            //<Route path="/login" component={Login}></Route>
-           
-          }
         </Routes>
-      </Router>
-    </>
+   </Suspense>
+      
   )
 }
 

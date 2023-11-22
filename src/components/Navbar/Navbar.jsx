@@ -16,17 +16,17 @@ function Navbar() {
         <h3 className='nav-header'>Sweng Group 27</h3>
         <ul className='nav-items'>
             <li>
-                <Link to="/Login">
+                <Link to="/Login" className="link">
                     Login/
                 </Link>
-                <Link to="/Register">
+                <Link to="/Register" className="link">
                     Register
                 </Link>
                 </li>
             <li>
-            <Link to="/Contact">
+            <Link to="/Contact" className="link">
                 Contact
-            </Link><PhoneOutlined /></li>
+            </Link><PhoneOutlined style={{ color: '#d0adf0'}}/></li>
         </ul>
         <div className="navbar-right">
             <Link to="/checkout">

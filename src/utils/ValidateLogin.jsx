@@ -1,11 +1,15 @@
 
 
-export default function ValidateLogin({ email, password}) {
+export default function ValidateLogin({ name, email, password}) {
     let errorsList = 
         {
+            name: '',
             email: '',
             password: ''
         };
+      if (!name) {
+          errorsList.name = "Name is required";
+      }
       if (!email) {
         errorsList.email = "Email address is required";
       } else if (!/\S+@\S+\.\S+/.test(email)) {
