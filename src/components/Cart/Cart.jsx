@@ -6,38 +6,35 @@ import Navbar from "..//Navbar/Navbar";
 import axios from "axios";
 import { useState } from "react";
 
-const ProductBlock = ( {productNumber}) => {
-    const [products, setProducts] = useState([]);
-    const url = "http://localhost:8080/online-shop/products";
+const Cart = () => {
+    const [cart, setCart] = useState([]);
+    const url = "http://localhost:8080/:userid/cart";
     axios
         .get(url)
         .then((response) => {
-            setProducts(response.data);
+            setCart(...response);
         })
         .catch(function (error) {
             // handle error
             console.log(error);
             });
-
-  
-    
-    return (
-        <div className="prod">
-            <Navbar showLogin={true}/>
+     return (
+        <>
+            
+            <Navbar showLogin={true} />
             <Container>
                 <Grid divided>
                     <Grid.Row>
-                        {[...products].map((product, index) => {
-                          
+                        {cart.map((product, index) => {
                         return (
                             <Grid.Column stretched key={index}>
                                 <Product
                                     id={index}
                                     key={index}
-                                    title={product.name}
+                                    title={product.title}
                                     price={product.price}
-                                    rating="5"
-                                    image={reactLogo}
+                                    rating={product.rating}
+                                    image={product.image}
                                 ></Product>
                             </Grid.Column>
                             
@@ -48,8 +45,8 @@ const ProductBlock = ( {productNumber}) => {
                     
                 </Grid>
             </Container>
-        </div>
-
-    );
+        </>
+     )  ;     
 }
-export default ProductBlock;
+
+export default Cart;

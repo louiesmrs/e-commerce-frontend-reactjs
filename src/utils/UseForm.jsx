@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { notification } from "antd";
-export const useForm = (validate) => {
+export const useForm = (validate, type) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [shouldSubmit, setShouldSubmit] = useState(false);
 
   const openNotificationWithIcon = () => {
+    console.log("notif")
     notification.open({
       message: "Success",
       description: "Your message has been sent!",
@@ -17,7 +18,8 @@ export const useForm = (validate) => {
     event.preventDefault();
     setErrors(validate(values));
     // Your url for API
-    const url = "http://localhost:8080/contact";
+    const url = `http://localhost:8080/${type}`;
+    setShouldSubmit(true);
     if (Object.keys(values).length === 3) {
       axios
         .post(url, {
@@ -33,8 +35,13 @@ export const useForm = (validate) => {
     }
   };
 
+
   useEffect(() => {
-    if (errors.message === "" && errors.message === "" && errors.email === "" && errors.password === "" && shouldSubmit) {
+    console.log(errors);
+    console.log(Object.values(errors)[0] === "");
+    console.log(Object.values(errors)[1] === "");
+    console.log(Object.values(errors)[2] === "");
+    if (Object.values(errors)[0] === "" && Object.values(errors)[1] === "" && Object.values(errors)[2] === ""  && shouldSubmit) {
       setValues("");
       openNotificationWithIcon();
     }
@@ -54,5 +61,6 @@ export const useForm = (validate) => {
     handleSubmit,
     values,
     errors,
+    shouldSubmit
   };
 };

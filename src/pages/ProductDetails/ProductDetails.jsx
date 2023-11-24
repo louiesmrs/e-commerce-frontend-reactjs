@@ -8,19 +8,26 @@ function ProductDetails() {
 
     const title = useParams();
     
-    const [product, setProduct] = useState([]);
-    const url = "http://localhost:8080/product";
+    const [product, setProduct] = useState(
+        {
+            name:'',
+            price:'',
+            sizes:'',
+            id:''
+        }
+    );
+    const url = `http://localhost:8080/online-shop/product/${title.title}`;
     axios
         .get(url)
         .then((response) => {
-            setProduct(...response);
+            setProduct(response.data);
         })
         .catch(function (error) {
             // handle error
             console.log(error);
             });
-    
-    console.log(title);
+    const sizeArray = product.sizes.split(" ");
+
     
     return (
         <div className="home">
@@ -33,13 +40,13 @@ function ProductDetails() {
                     <h1>{title.title}</h1>
                     <p className="product-description"> This is the description </p>
                     <div className="product-price">
-                        1$
+                        {product.price}$
                     </div>
                     <select className="product-select">
-                            <option>S</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
+                            <option>S &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[0]} remaining</option>
+                            <option>M &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[1]} remaining</option>
+                            <option>L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[2]} remaining</option>
+                            <option>XL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[3]} remaining</option>
                     </select>
                     <button className="add-to-cart-button">Add to Cart</button>
              </div>

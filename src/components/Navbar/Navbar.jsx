@@ -7,7 +7,26 @@ import {
     PhoneOutlined 
 } from '@ant-design/icons';
 
-function Navbar() {
+function Navbar({ showLogin }) {
+
+    let profileItem;
+    if(showLogin) {
+        profileItem = 
+        <>
+            <Link to="/Login" className="link">
+                        Login/
+            </Link>
+            <Link to="/Register" className="link">
+                        Register
+            </Link> 
+        </>;
+    } else {
+        profileItem = 
+        <Link to="/Profile" className="link">
+                    Profile
+                </Link>
+    }
+
     return (
     <nav className='nav'>
         <Link to="/home">
@@ -16,13 +35,13 @@ function Navbar() {
         <h3 className='nav-header'>Sweng Group 27</h3>
         <ul className='nav-items'>
             <li>
-                <Link to="/Login" className="link">
-                    Login/
+                <Link to="/Sell" className="link">
+                    Sell 
                 </Link>
-                <Link to="/Register" className="link">
-                    Register
-                </Link>
-                </li>
+            </li>
+            <li>
+                {profileItem}
+            </li>
             <li>
             <Link to="/Contact" className="link">
                 Contact
