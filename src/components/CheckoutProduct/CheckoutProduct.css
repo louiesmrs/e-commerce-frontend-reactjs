@@ -1,5 +1,6 @@
 .product{
     margin-top: 25px; 
+    align-items: center;
    
 }
 
@@ -19,20 +20,9 @@
     text-align: center;
 }
 
-.product__button {
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .product__button:hover {
-    background-color: #005f7c;
-  }
+.product__button{
+    background-color: #8D86CC !important;
+}
 
 .product__price{
     font-weight: bold;

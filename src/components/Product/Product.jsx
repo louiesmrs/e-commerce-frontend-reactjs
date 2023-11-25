@@ -2,23 +2,26 @@ import { Card, Image, Button, Rating } from "semantic-ui-react";
 import "./Product.css";
 import { Link } from 'react-router-dom';
 import { notification } from "antd";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { CartContext } from "../../utils/cartUtil";
 function Product( props ) {
-    const [shouldSubmit, setShouldSubmit] = useState(false);
-    const handleClick = () => {
-        const url = "http://localhost:8080/:userid/cart";
-          axios
-            .post(url, {
-                props,
-            })
-            .then(() => {
-              setShouldSubmit(true);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-              });
+    const { addToCart } = useContext(CartContext);
+    const [product, setProduct] = useState(
+        {
+            _id:props.id,
+            name:props.name,
+            price:props.price,
+            selectedSize: 's',
+            sizes:props.sizes,
+            
+        }
+    );
+    
+    
+    const handleInput = () => {
+        console.log(product);
+        addToCart(product);
+        openNotificationWithIcon();
     }
     const openNotificationWithIcon = () => {
         notification.open({
@@ -26,26 +29,18 @@ function Product( props ) {
           description: "Item has been addded to card!",
         });
       };
-    
+     
+    const sizeArray = props.sizes.split(" ");
       
-    
-      useEffect(() => {
-        if (shouldSubmit) {
-          openNotificationWithIcon();
-        }
-      }, [shouldSubmit]);
     return (
         <div className="product product__card" >
                 <div >
-                    <Link to={`/product/${props.title}`}>   
+                    <Link to={`/product/${props.name}`}>   
                     <Card >
                     
                         <Image className="product__image" centered src={props.image} />
                         <Card.Content>
-                        <Card.Header className="product__title">{props.title}</Card.Header>
-                        <Card.Meta>
-                            <Rating icon="star" defaultRating={props.rating} maxRating={5} />
-                        </Card.Meta>
+                        <Card.Header className="product__title">{props.name}</Card.Header>
                         <Card.Description>
                             <span className="product__price">${props.price}</span>
                         </Card.Description>
@@ -56,10 +51,15 @@ function Product( props ) {
                 </div>
                     <Card>
                         <Card.Content extra className="product__footer">
-                        <Button inverted className="product__button" onClick={handleClick}>
-                            ADD TO BASKET
-                        </Button>
+                        <select className="product-select" value={product.selectedSize} onChange={e => setProduct({...product, selectedSize : e.target.value})}>
+                            <option value="s">S &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[0]} remaining</option>
+                            <option value="m">M &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[1]} remaining</option>
+                            <option value="l">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[2]} remaining</option>
+                            <option value="xl">XL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[3]} remaining</option>
+                        </select>
+                        
                         </Card.Content>
+                        <button className="product__button" onClick={handleInput}>Add to Cart</button>
                     </Card>
         </div>
 

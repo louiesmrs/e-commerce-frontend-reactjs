@@ -1,6 +1,6 @@
 
 
-function ValidateProduct({ email, name, message}) {
+function ValidateProduct({ name, price, sizes}) {
 
     let errorsList = {
         name: '',
@@ -17,7 +17,7 @@ function ValidateProduct({ email, name, message}) {
       }
       if (!sizes) {
         errorsList.sizes= "Sizes are required";
-      } else if(!/^(?!(?:\S*\s){4})([/^\d+$/]+)$/.test) {
+      } else if(!/^(?!(?:\S*\s){4})([0-9\'\s]+)$/.test(sizes)) {
         errorsList.sizes= "Sizes must be numbers seperated by 4 whitespaces";
       }
       return errorsList;

@@ -52,7 +52,7 @@ function SellBlock() {
                     <input
                     type="text"
                     name="sizes"
-                    placeholder="Size of Product"
+                    placeholder="Sizes of Product"
                     value={values.sizes || ""}
                     onChange={handleChange}
                     />

@@ -1,11 +1,9 @@
 import { lazy } from 'react';
-const ProductBlock = lazy(() => import("../../components/ProductBlock/ProductBlock"));
+const Cart = lazy(() => import("../../components/Cart/Cart"));
+
 function Checkout() {
-    
     return (
-       <ProductBlock 
-            productNumber={1}
-        />
+       <Cart />
 
     );
 }
