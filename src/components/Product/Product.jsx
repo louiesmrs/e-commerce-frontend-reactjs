@@ -19,17 +19,24 @@ function Product( props ) {
     
     
     const handleInput = () => {
-        console.log(product);
-        addToCart(product);
-        openNotificationWithIcon();
+        if(addToCart(product)) {
+            openNotificationSuccess();
+        } else {
+            openNotificationFail();
+        }
     }
-    const openNotificationWithIcon = () => {
+    const openNotificationSuccess = () => {
         notification.open({
           message: "Success",
           description: "Item has been addded to card!",
         });
       };
-     
+    const openNotificationFail = () => {
+        notification.open({
+          message: "Fail",
+          description: "There are no more available items for this size",
+        });
+      };
     const sizeArray = props.sizes.split(" ");
       
     return (

@@ -16,18 +16,27 @@ function ProductDetails() {
             sizes:'',
             _id:'',
             selectedSize: 's',
+
         }
     );
     
     const handleClick = () => {
-        console.log(product);
-        addToCart(product);
-        openNotificationWithIcon();
+        if(addToCart(product)) {
+            openNotificationSuccess();
+        } else {
+            openNotificationFail();
+        }
     }
-    const openNotificationWithIcon = () => {
+    const openNotificationSuccess = () => {
         notification.open({
           message: "Success",
           description: "Item has been addded to card!",
+        });
+      };
+    const openNotificationFail = () => {
+        notification.open({
+          message: "Fail",
+          description: "There are no more available items for this size",
         });
       };
     
@@ -42,7 +51,7 @@ function ProductDetails() {
             console.log(error);
             });
     const sizeArray = product.sizes.split(" ");
-
+   
     
     return (
         <div className="home">

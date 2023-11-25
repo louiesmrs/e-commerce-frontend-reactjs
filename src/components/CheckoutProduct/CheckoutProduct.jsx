@@ -80,11 +80,8 @@ function CheckoutProduct( props ) {
                         <Button
                             className="product__button"
                             onClick={() => {
-                                if(checkSelectedSize()) {
-                                    addToCart(product)
-                                    setProduct({...product, quantity:product.quantity+1})
-                                } else {
-                                    notfiNoRemainingSizes();
+                                if(!addToCart(product)) {
+                                    notfiNoRemainingSizes();   
                                 }
                             }}
                             >
@@ -98,7 +95,6 @@ function CheckoutProduct( props ) {
                                 handleRemoveFromCart(product);
                                 } else {
                                 removeFromCart(product);
-                                setProduct({...product, quantity:product.quantity-1})
                                 }
                             }}
                             >

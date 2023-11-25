@@ -8,19 +8,46 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id && cartItem.selectedSize === item.selectedSize);
+        if (isItemInCart) {
+            if(checkSelectedSize(isItemInCart)){
+                setCartItems(
+                    cartItems.map((cartItem) =>
+                    cartItem._id === item._id
+                        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                        : cartItem
+                    )
+                );
+            } else {
+                return false;
+            }
+        } else {
+        setCartItems([...cartItems, { ...item, quantity: 1 }]);
+        }
+        return true;
+        };
 
-    if (isItemInCart) {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem._id === item._id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+  const checkSelectedSize = (item) => {
+    console.log(item);
+    let numberAvailable;
+    const sizeArray = item.sizes.split(" ");
+    switch(item.selectedSize) {
+        case "s":
+            numberAvailable = sizeArray[0];
+        break;
+        case "m":
+            numberAvailable = sizeArray[1];
+        break;
+        case "l":
+            numberAvailable = sizeArray[2];
+        break;
+        case "xl":
+            numberAvailable = sizeArray[3];
+        break; 
     }
-  };
+    console.log(numberAvailable);
+    console.log(item.quantity);
+    return numberAvailable > item.quantity;
+}
 
   const removeFromCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id);
