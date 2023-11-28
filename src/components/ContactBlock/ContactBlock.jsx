@@ -21,7 +21,7 @@ const ContactBlock = () => {
 
   return (
     <>
-        <Navbar showLogin={true}/>
+        <Navbar />
         <Container className="contact">
         <Grid divided>
         <Grid.Row justify="space-between" align="middle">

@@ -35,7 +35,7 @@ const LoginBlock = () => {
 
   return (
     <>
-        <Navbar showLogin={showLogin} />
+        <Navbar  />
         <Container className="login-card">
         <Grid divided>
         <Grid.Row justify="space-between" align="middle">

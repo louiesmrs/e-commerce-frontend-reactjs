@@ -28,3 +28,7 @@
   .checkout-button:hover {
     background-color: #007c53;
   }
+
+  .cart {
+    text-align: center;
+  }

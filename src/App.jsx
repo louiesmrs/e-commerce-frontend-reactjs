@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 
 import './App.css'
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Checkout from "./pages/Checkout/Checkout"
 import ProductDetails from './pages/ProductDetails/ProductDetails';

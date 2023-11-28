@@ -7,7 +7,6 @@ export const useForm = (validate, type) => {
   const [shouldSubmit, setShouldSubmit] = useState(false);
 
   const openNotificationWithIcon = () => {
-    console.log("notif")
     notification.open({
       message: "Success",
       description: "Your message has been sent!",
@@ -18,8 +17,7 @@ export const useForm = (validate, type) => {
     event.preventDefault();
     setErrors(validate(values));
     // Your url for API
-    const url = `http://localhost:8080/${type}`;
-    setShouldSubmit(true);
+    //const url = `http://localhost:8080/online-shop/${type}`;
     if (Object.keys(values).length === 3) {
       axios
         .post(url, {
@@ -40,7 +38,7 @@ export const useForm = (validate, type) => {
     console.log(errors);
     console.log(Object.values(errors)[0] === "");
     console.log(Object.values(errors)[1] === "");
-    console.log(Object.values(errors)[2] === "");
+    console.log(values);
     if (Object.values(errors)[0] === "" && Object.values(errors)[1] === "" && Object.values(errors)[2] === ""  && shouldSubmit) {
       setValues("");
       openNotificationWithIcon();

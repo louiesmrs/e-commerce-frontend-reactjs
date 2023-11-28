@@ -41,7 +41,7 @@ const ProductBlock = () => {
     
     return (
         <div className="prod">
-            <Navbar showLogin={true}/>
+            <Navbar />
             <Container>
             <div className="search" >
                     <Input 

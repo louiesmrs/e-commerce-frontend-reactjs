@@ -5,7 +5,7 @@ export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
-
+   
   const addToCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id && cartItem.selectedSize === item.selectedSize);
         if (isItemInCart) {
@@ -27,7 +27,6 @@ export const CartProvider = ({ children }) => {
         };
 
   const checkSelectedSize = (item) => {
-    console.log(item);
     let numberAvailable;
     const sizeArray = item.sizes.split(" ");
     switch(item.selectedSize) {
@@ -44,8 +43,6 @@ export const CartProvider = ({ children }) => {
             numberAvailable = sizeArray[3];
         break; 
     }
-    console.log(numberAvailable);
-    console.log(item.quantity);
     return numberAvailable > item.quantity;
 }
 
@@ -68,6 +65,10 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     setCartItems([]);
   };
+
+  const getNumberInCart = () => {
+    return cartItems.reduce((total, item) => total + (1 * item.quantity), 0);
+  }
 
   const getCartTotal = () => {
     return Math.round(cartItems.reduce((total, item) => total + item.price * item.quantity, 0) * 100) / 100;
@@ -92,6 +93,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         clearCart,
         getCartTotal,
+        getNumberInCart
       }}
     >
       {children}

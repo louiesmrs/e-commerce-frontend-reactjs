@@ -29,12 +29,14 @@ function Product( props ) {
         notification.open({
           message: "Success",
           description: "Item has been addded to card!",
+          placement: "topLeft"
         });
       };
     const openNotificationFail = () => {
         notification.open({
           message: "Fail",
           description: "There are no more available items for this size",
+          placement: "topLeft"
         });
       };
     const sizeArray = props.sizes.split(" ");

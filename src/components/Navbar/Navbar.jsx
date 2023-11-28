@@ -6,9 +6,12 @@ import {
     ShoppingCartOutlined,
     PhoneOutlined 
 } from '@ant-design/icons';
+import { useContext, useState} from "react";
+import { CartContext } from "../../utils/cartUtil";
 
-function Navbar({ showLogin }) {
-
+function Navbar() {
+    const { getNumberInCart } = useContext(CartContext);
+    const [showLogin, setShowLogin] = useState(true);
     let profileItem;
     if(showLogin) {
         profileItem = 
@@ -51,6 +54,7 @@ function Navbar({ showLogin }) {
             <Link to="/checkout">
                 <ShoppingCartOutlined style={{ fontSize: '250%'}}/>
             </Link>
+            <h3>{getNumberInCart()}</h3>
       </div>
     </nav>
     ); 

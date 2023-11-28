@@ -1,4 +1,4 @@
-import { Card, Image, Button, Rating } from "semantic-ui-react";
+import { Card, Image, Button, Rating, CardDescription } from "semantic-ui-react";
 import "./CheckoutProduct.css";
 import { Link } from 'react-router-dom';
 import { notification } from "antd";
@@ -16,28 +16,7 @@ function CheckoutProduct( props ) {
             selectedSize:props.selectedSize
         }
     );
-    const sizeArray = props.sizes.split(" ");
-    const checkSelectedSize = () => {
-        let numberAvailable;
-        switch(product.selectedSize) {
-            case "s":
-                numberAvailable = sizeArray[0];
-            break;
-            case "m":
-                numberAvailable = sizeArray[1];
-            break;
-            case "l":
-                numberAvailable = sizeArray[2];
-            break;
-            case "xl":
-                numberAvailable = sizeArray[3];
-            break; 
-        }
-        console.log(numberAvailable);
-        console.log(product.quantity);
-        return numberAvailable > product.quantity;
-    }
-    
+   
     const handleRemoveFromCart = () => {
         removeFromCart(product);
         openNotificationWithIcon();
@@ -47,6 +26,7 @@ function CheckoutProduct( props ) {
         notification.open({
           message: "Success",
           description: "Item has been removed from card!",
+          placement: "topLeft",
         });
       };
 
@@ -54,6 +34,7 @@ function CheckoutProduct( props ) {
         notification.open({
           message: "Sorry",
           description: "There are no more avaiable size in this item",
+          placement: "topLeft",
         });
       };
     
@@ -68,13 +49,17 @@ function CheckoutProduct( props ) {
                         <Card.Content>
                         <Card.Header className="product__title">{props.name}</Card.Header>
                         <Card.Description>
-                            <span className="product__price">${props.price}</span>
+                            <span className="product__price">${props.price}</span> 
                         </Card.Description>
+                        <CardDescription>
+                             <span className="product__price">Size {props.selectedSize}</span>
+                        </CardDescription>
                         </Card.Content>
                      
                         </Card>
                         </Link>
                 </div>
+                    <div >
                     <Card>
                         <Card.Content extra className="product__footer">
                         <Button
@@ -102,6 +87,7 @@ function CheckoutProduct( props ) {
                             </Button>
                         </Card.Content>
                     </Card>
+                    </div>
         </div>
 
       );

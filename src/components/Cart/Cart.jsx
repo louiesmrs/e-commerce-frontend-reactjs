@@ -36,6 +36,7 @@ const Cart = () => {
         notification.open({
           message: "Success",
           description: "Your order was successful",
+          placement: "topLeft",
         });
       };
 
@@ -43,11 +44,12 @@ const Cart = () => {
         notification.open({
           message: "Success",
           description: "Your cart has been cleared!",
+          placement: "topLeft",
         });
       };
      return (
-        <>
-            <Navbar showLogin={true} />
+        <div className="cart">
+            <Navbar  />
             <Container textAlign="center">
                 <Grid divided>
                     <Grid.Row>
@@ -99,7 +101,7 @@ const Cart = () => {
                     }
              </div>
             </Container>
-        </>
+        </div>
      )  ;     
 }
 

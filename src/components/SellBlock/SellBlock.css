@@ -8,3 +8,12 @@
     text-align: center;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
+
+.product__button{
+    background-color: #8D86CC !important;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}

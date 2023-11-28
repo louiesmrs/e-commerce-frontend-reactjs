@@ -24,8 +24,7 @@ const RegisterBlock = () => {
       };
     return (
     <>
-        <Navbar showLogin={true} />
-        
+        <Navbar />
         <div className='reg'>
             <Message 
                 attached
