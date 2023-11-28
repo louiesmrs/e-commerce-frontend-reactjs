@@ -37,7 +37,7 @@ function SellBlock() {
         const ErrorMessage = errors[type];
         return (
           <>
-            <span erros={errors[type]}>{ErrorMessage}</span>
+            <span className="span" erros={errors[type]}>{ErrorMessage}</span>
          </>
         );
       };
@@ -109,8 +109,8 @@ function SellBlock() {
         <Grid.Row justify="space-between" align="middle">
             <Grid.Column >
                 <form autoComplete="off" >
-                <Grid.Column span={24}>
-                    <input
+                <Grid.Column span={48}>
+                    <input className="ui"
                     type="text"
                     name="name"
                     placeholder="Name of product"
@@ -120,7 +120,7 @@ function SellBlock() {
                     <ValidationType type="name" />
                 </Grid.Column>
                 <Grid.Column span={24}>
-                    <input
+                    <input className="ui"
                     type="text"
                     name="price"
                     placeholder="Price of Product"
@@ -138,7 +138,7 @@ function SellBlock() {
                             >
                             +
                             </Button>
-                            <p>{sizeString.small} size Small</p>
+                            <p className="size">{sizeString.small} size Small</p>
                             <Button
                             className="product__button"
                             onClick={(e) => {

@@ -4,30 +4,56 @@ import CheckoutProduct from "../../components/CheckoutProduct/CheckoutProduct";
 import reactLogo from "../../assets/react.svg";
 import Navbar from "..//Navbar/Navbar";
 import axios from "axios";
+
+import validate from "../../utils/ValidateCheckout";
 import { useContext, useState, useEffect} from "react";
 import { CartContext } from "../../utils/cartUtil";
 import { notification } from "antd";
 const Cart = () => {
     const [shouldSubmit, setShouldSubmit] = useState(false);
     const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
-    const Checkout = () => {
+    const [values, setValues] = useState({});
+    const [errors, setErrors] = useState({});
+    const handleChange = (event) => {
+        event.persist();
+        setValues((values) => ({
+            ...values,
+            [event.target.name]: event.target.value,
+        }));
+        setErrors((errors) => ({ ...errors, [event.target.name]: "" }));
+        };
+    const ValidationType = ({ type }) => {
+        const ErrorMessage = errors[type];
+        return (
+            <>
+            <span className="span" erros={errors[type]}>{ErrorMessage}</span>
+            </>
+        );
+    };
+    const Checkout = (event) => {
+        event.preventDefault();
+        console.log(errors);
+        console.log(values);
+        setErrors(validate(values));
         const url = `http://localhost:8080/onlineshop/order`;
-        setShouldSubmit(true);
-        axios
-            .post(url, {
-            cartItems,
-            })
-            .then(() => {
-            setShouldSubmit(true);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });  
+        if (Object.keys(values).length === 2 && Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
+            axios
+                .post(url, {
+                cartItems,
+                })
+                .then(() => {
+                setShouldSubmit(true);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });  
+        }
     }
     useEffect(() => {
         
         if (shouldSubmit) {
+          setValues("");
           openCheckoutNotficiation();
         }
       }, [shouldSubmit]);
@@ -71,7 +97,35 @@ const Cart = () => {
                         );
                         })}
                     </Grid.Row>
+                    <Grid.Row justify="space-between" align="middle">
+                    <h3>Checkout Form</h3>
+                        <Grid.Column >
+                            <form autoComplete="off" >
+                            <Grid.Column span={24}>
+                                <input className="email"
+                                type="text"
+                                name="email"
+                                placeholder="Your Email"
+                                value={values.email|| ""}
+                                onChange={handleChange}
+                                />
+                                <ValidationType type="email" />
+                            </Grid.Column>
+                            <Grid.Column span={24}>
+                                <input className="postcode"
+                                type="text"
+                                name="postcode"
+                                placeholder="Your Postcode"
+                                value={values.postcode || ""}
+                                onChange={handleChange}
+                                />
+                                <ValidationType type="postcode" />
+                            </Grid.Column>
+                            </form>
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
+
                 <div>
                     {
                     cartItems.length > 0 ? (
@@ -88,8 +142,8 @@ const Cart = () => {
                     </button>
                     <button
                         className="checkout-button"
-                        onClick={() => {
-                        Checkout();
+                        onClick={(e) => {
+                        Checkout(e);
                         }}
                     >
                         Checkout

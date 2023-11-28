@@ -1,5 +1,8 @@
 .submit {
     margin-right: 5px;
+    background-color: #8D86CC;
+    height: 50px;
+    width: 100px;
 }
 
 .login-card {
@@ -7,4 +10,14 @@
     align-items: center;
     text-align: center;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.ui {
+    margin-bottom: 5px;
+}
+
+.span {
+    display: block;
+    font-weight: 600;
+    color: rgb(255, 130, 92);
 }

@@ -13,3 +13,8 @@
     margin-left: 5px;
  }
 
+.span {
+    display: block;
+    font-weight: 600;
+    color: rgb(255, 130, 92);
+}

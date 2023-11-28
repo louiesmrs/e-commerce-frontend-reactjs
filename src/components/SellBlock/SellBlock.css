@@ -1,5 +1,6 @@
 .submit {
     margin-right: 5px;
+    background-color: #8D86CC
 }
 
 .sell-card {
@@ -16,4 +17,20 @@
 .buttons {
     display: flex;
     justify-content: center;
+}
+
+.ui {
+    margin-bottom: 10px;
+
+}
+
+.size {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.span {
+    display: block;
+    font-weight: 600;
+    color: rgb(255, 130, 92);
 }

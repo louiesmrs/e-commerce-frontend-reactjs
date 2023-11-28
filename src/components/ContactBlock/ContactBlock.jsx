@@ -14,7 +14,7 @@ const ContactBlock = () => {
     const ErrorMessage = errors[type];
     return (
       <>
-        <span erros={errors[type]}>{ErrorMessage}</span>
+        <span className="span" erros={errors[type]}>{ErrorMessage}</span>
      </>
     );
   };
@@ -29,7 +29,7 @@ const ContactBlock = () => {
             <Grid.Column >
                 <form autoComplete="off" >
                 <Grid.Column span={24}>
-                    <input
+                    <input className="user"
                     type="text"
                     name="name"
                     placeholder="Your Name"
@@ -39,7 +39,7 @@ const ContactBlock = () => {
                     <ValidationType type="name" />
                 </Grid.Column>
                 <Grid.Column span={24}>
-                    <input
+                    <input className="user"
                     type="text"
                     name="email"
                     placeholder="Your Email"
@@ -48,8 +48,9 @@ const ContactBlock = () => {
                     />
                     <ValidationType type="email" />
                 </Grid.Column>
+                <div className="message">
                 <Grid.Column span={24}>
-                    <textarea
+                    <textarea className="msg-content"
                     placeholder="Your Message"
                     value={values.message || ""}
                     name="message"
@@ -57,6 +58,7 @@ const ContactBlock = () => {
                     />
                     <ValidationType type="message" />
                 </Grid.Column>
+                </div>
                 <Button name="submit" onClick={handleSubmit}>{"Submit"}</Button>
                 </form>
             </Grid.Column>

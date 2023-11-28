@@ -18,7 +18,7 @@ const RegisterBlock = () => {
         const ErrorMessage = errors[type];
         return (
           <>
-            <span erros={errors[type]}>{ErrorMessage}</span>
+            <span className='span' erros={errors[type]}>{ErrorMessage}</span>
          </>
         );
       };
@@ -51,9 +51,9 @@ const RegisterBlock = () => {
             <Form.Group>
                 <Form.Input label='Password' type='password' value={values.password || ""}
                     onChange={handleChange} />
-                    <p>Passwords must contain 1 number and 1 special character and between 6-16 characters</p>
                 <ValidationType type="password" />
             </Form.Group>
+            <p>Passwords must contain 1 number and 1 special character and between 6-16 characters</p>
             <Button className='submit' color='blue' onClick={handleSubmit}>Submit</Button>
             <LoginOutlined />
             </Form>

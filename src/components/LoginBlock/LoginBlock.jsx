@@ -21,7 +21,7 @@ const LoginBlock = () => {
     const ErrorMessage = errors[type];
     return (
       <>
-        <span erros={errors[type]}>{ErrorMessage}</span>
+        <span className="span" erros={errors[type]}>{ErrorMessage}</span>
      </>
     );
   };
@@ -42,7 +42,7 @@ const LoginBlock = () => {
             <Grid.Column >
                 <form autoComplete="off" >
                 <Grid.Column span={24}>
-                    <input
+                    <input className="ui"
                     type="text"
                     name="name"
                     placeholder="Your Username"
@@ -52,7 +52,7 @@ const LoginBlock = () => {
                     <ValidationType type="name" />
                 </Grid.Column>
                 <Grid.Column span={24}>
-                    <input
+                    <input className="ui"
                     type="text"
                     name="email"
                     placeholder="Your Email"
@@ -62,16 +62,17 @@ const LoginBlock = () => {
                     <ValidationType type="email" />
                 </Grid.Column>
                 <Grid.Column span={24}>
-                    <input
+                    <input className="ui"
                     type="text"
                     name="password"
                     placeholder="Your Password"
                     value={values.password || ""}
                     onChange={handleChange}
                     />
-                    <p>Passwords must contain 1 number and 1 special character and between 6-16 characters</p>
+                    
                     <ValidationType type="password" />
                 </Grid.Column>
+                <p>Passwords must contain 1 number and 1 special character and between 6-16 characters</p>
                 <Button className="submit" onClick={handleSubmit}>{"Submit"}</Button>
                 <LoginOutlined />
                 </form>
