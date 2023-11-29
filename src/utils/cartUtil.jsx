@@ -7,12 +7,12 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
    
   const addToCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id && cartItem.selectedSize === item.selectedSize);
+    const isItemInCart = cartItems.find((cartItem) => cartItem.name === item.name && cartItem.selectedSize === item.selectedSize);
         if (isItemInCart) {
             if(checkSelectedSize(isItemInCart)){
                 setCartItems(
                     cartItems.map((cartItem) =>
-                    cartItem._id === item._id
+                    cartItem.name === item.name
                         ? { ...cartItem, quantity: cartItem.quantity + 1 }
                         : cartItem
                     )
@@ -47,14 +47,14 @@ export const CartProvider = ({ children }) => {
 }
 
   const removeFromCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id);
+    const isItemInCart = cartItems.find((cartItem) => cartItem.name === item.name);
 
     if (isItemInCart.quantity === 1) {
-      setCartItems(cartItems.filter((cartItem) => cartItem._id !== item._id));
+      setCartItems(cartItems.filter((cartItem) => cartItem.name !== item.name));
     } else {
       setCartItems(
         cartItems.map((cartItem) =>
-          cartItem._id === item._id
+          cartItem.name === item.name
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         )

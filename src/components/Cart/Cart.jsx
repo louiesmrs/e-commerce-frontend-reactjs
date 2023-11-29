@@ -35,7 +35,7 @@ const Cart = () => {
         console.log(errors);
         console.log(values);
         setErrors(validate(values));
-        const url = `http://localhost:8080/onlineshop/order`;
+        const url = `http://localhost:8080/onlineshop/addOrder`;
         if (Object.keys(values).length === 2 && Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
             axios
                 .post(url, {
@@ -97,39 +97,38 @@ const Cart = () => {
                         );
                         })}
                     </Grid.Row>
-                    <Grid.Row justify="space-between" align="middle">
-                    <h3>Checkout Form</h3>
-                        <Grid.Column >
-                            <form autoComplete="off" >
-                            <Grid.Column span={24}>
-                                <input className="email"
-                                type="text"
-                                name="email"
-                                placeholder="Your Email"
-                                value={values.email|| ""}
-                                onChange={handleChange}
-                                />
-                                <ValidationType type="email" />
-                            </Grid.Column>
-                            <Grid.Column span={24}>
-                                <input className="postcode"
-                                type="text"
-                                name="postcode"
-                                placeholder="Your Postcode"
-                                value={values.postcode || ""}
-                                onChange={handleChange}
-                                />
-                                <ValidationType type="postcode" />
-                            </Grid.Column>
-                            </form>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-
-                <div>
+                
                     {
                     cartItems.length > 0 ? (
-                        <div>
+                        <div>   
+                            <Grid.Row justify="space-between" align="middle">
+                            <h3>Checkout Form</h3>
+                            <Grid.Column >
+                                <form autoComplete="off" >
+                                <Grid.Column span={24}>
+                                    <input className="email"
+                                    type="text"
+                                    name="email"
+                                    placeholder="Your Email"
+                                    value={values.email|| ""}
+                                    onChange={handleChange}
+                                    />
+                                    <ValidationType type="email" />
+                                </Grid.Column>
+                                <Grid.Column span={24}>
+                                    <input className="postcode"
+                                    type="text"
+                                    name="postcode"
+                                    placeholder="Your Postcode"
+                                    value={values.postcode || ""}
+                                    onChange={handleChange}
+                                    />
+                                    <ValidationType type="postcode" />
+                                </Grid.Column>
+                                </form>
+                            </Grid.Column>
+                            </Grid.Row>
+                        
                     <h1>Total: ${getCartTotal()}</h1>
                     <button
                         className="clear-cart-button"
@@ -153,8 +152,10 @@ const Cart = () => {
                         <h1>Your cart is empty</h1>
                     )
                     }
-             </div>
-            </Container>
+             
+        </Grid>
+
+        </Container>
         </div>
      )  ;     
 }

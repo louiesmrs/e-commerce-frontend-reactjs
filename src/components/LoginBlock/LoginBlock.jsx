@@ -1,22 +1,28 @@
 
-import { useForm } from "../../utils/useForm";
-import validate from "../../utils/ValidateLogin";
+
+
 import { Container, Grid, Button} from "semantic-ui-react";
 import Navbar from "../Navbar/Navbar";
 import './LoginBlock.css'
 import {
   LoginOutlined
 } from '@ant-design/icons';
-import { useState, useEffect } from "react";
-
+import { AuthContext } from "../../utils/useAuth";
+import { useContext, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginBlock = () => {
-  const { values, errors, handleChange, handleSubmit, shouldSubmit } = useForm(
-    validate, "login"
-  );
+  const { values, errors, handleChange, handleSubmit, isLoggedIn} = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(isLoggedIn) {
+        navigate(`/profile`);
+    }
+}, [isLoggedIn]);
 
   
-  const [showLogin, setShowLogin] = useState(true);
+  
   const ValidationType = ({ type }) => {
     const ErrorMessage = errors[type];
     return (
@@ -26,12 +32,7 @@ const LoginBlock = () => {
     );
   };
 
-  useEffect(() => {
-    if(errors.name === "" 
-        && errors.email === "" && errors.password === "" 
-            && values.message !== "" && values.email !== "" && values.password !== "" && shouldSubmit) {
-    setShowLogin(false);
-  }},[]);
+ 
 
   return (
     <>
@@ -41,16 +42,6 @@ const LoginBlock = () => {
         <Grid.Row justify="space-between" align="middle">
             <Grid.Column >
                 <form autoComplete="off" >
-                <Grid.Column span={24}>
-                    <input className="ui"
-                    type="text"
-                    name="name"
-                    placeholder="Your Username"
-                    value={values.name || ""}
-                    onChange={handleChange}
-                    />
-                    <ValidationType type="name" />
-                </Grid.Column>
                 <Grid.Column span={24}>
                     <input className="ui"
                     type="text"

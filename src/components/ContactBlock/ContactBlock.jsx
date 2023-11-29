@@ -7,7 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 
 const ContactBlock = () => {
   const { values, errors, handleChange, handleSubmit } = useForm(
-    validate, "contact"
+    validate, "contact", 3
   );
 
   const ValidationType = ({ type }) => {

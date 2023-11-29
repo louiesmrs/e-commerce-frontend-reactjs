@@ -6,12 +6,33 @@ import {
     ShoppingCartOutlined,
     PhoneOutlined 
 } from '@ant-design/icons';
-import { useContext, useState} from "react";
+import { useContext, useEffect, useState} from "react";
 import { CartContext } from "../../utils/cartUtil";
+import { AuthContext } from "../../utils/useAuth";
 
 function Navbar() {
     const { getNumberInCart } = useContext(CartContext);
+    const { user } = useContext(AuthContext);
     const [showLogin, setShowLogin] = useState(true);
+    const [showSell, setShowSell] = useState(false);
+    
+
+    useEffect(() => {
+        console.log(user);
+        console.log(user.email);
+        if (user.email !== undefined) {
+            setShowLogin(false);
+        } else {
+            setShowLogin(true);
+        }
+        if(user.admin === true) {
+            setShowSell(true);
+        } else {
+            setShowSell(false);
+        }
+
+    }, [user]);
+    
     let profileItem;
     if(showLogin) {
         profileItem = 
@@ -29,6 +50,18 @@ function Navbar() {
                     Profile
                 </Link>
     }
+    let sellItem;
+    if(showSell) {
+        sellItem = 
+        <>
+           <Link to="/Sell" className="link">
+                    Sell 
+                </Link>
+        </>;
+    } else {
+        sellItem = 
+        <></>
+    }
 
     return (
     <nav className='nav'>
@@ -38,9 +71,7 @@ function Navbar() {
         <h3 className='nav-header'>Sweng Group 27</h3>
         <ul className='nav-items'>
             <li>
-                <Link to="/Sell" className="link">
-                    Sell 
-                </Link>
+                {sellItem}
             </li>
             <li>
                 {profileItem}

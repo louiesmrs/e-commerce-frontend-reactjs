@@ -24,7 +24,7 @@ function SellBlock() {
         console.log(sizeString);
     });
     const { values, errors, handleChange, handleSubmit } = useForm(
-        validate, "addProduct"
+        validate, "addProduct", 3
       );
 
     
