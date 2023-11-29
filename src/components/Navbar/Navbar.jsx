@@ -18,8 +18,7 @@ function Navbar() {
     
 
     useEffect(() => {
-        console.log(user);
-        console.log(user.email);
+        
         if (user.email !== undefined) {
             setShowLogin(false);
         } else {

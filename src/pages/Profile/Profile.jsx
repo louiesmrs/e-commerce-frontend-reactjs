@@ -15,6 +15,7 @@ function Profile() {
     }, [user]);
     useEffect(() => {
         console.log(isLoggedIn);
+        console.log(user);
         if(!isLoggedIn) {
             navigate(`/login`);
         }

@@ -9,11 +9,13 @@ import validate from "../../utils/ValidateCheckout";
 import { useContext, useState, useEffect} from "react";
 import { CartContext } from "../../utils/cartUtil";
 import { notification } from "antd";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
     const [shouldSubmit, setShouldSubmit] = useState(false);
-    const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
+    const { cartItems, clearCart, getCartTotal, checkout } = useContext(CartContext);
     const [values, setValues] = useState({});
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
     const handleChange = (event) => {
         event.persist();
         setValues((values) => ({
@@ -51,10 +53,11 @@ const Cart = () => {
         }
     }
     useEffect(() => {
-        
         if (shouldSubmit) {
           setValues("");
           openCheckoutNotficiation();
+          navigate(`/success`);
+          checkout();
         }
       }, [shouldSubmit]);
     

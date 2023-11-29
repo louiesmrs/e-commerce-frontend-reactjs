@@ -36,15 +36,10 @@ export const useForm = ( validate, type ) => {
 
 
   useEffect(() => {
-    console.log(errors);
-    console.log(Object.values(errors)[0] === "");
-    console.log(Object.values(errors)[1] === "");
-    console.log(values);
-    console.log(shouldSubmit);
     if (Object.values(errors)[0] === "" && Object.values(errors)[1] === "" && Object.values(errors)[2] === ""  && shouldSubmit) {
-      console.log("here");
       setValues("");
       openNotificationWithIcon();
+      setShouldSubmit(false);
     }
   }, [errors, shouldSubmit]);
 

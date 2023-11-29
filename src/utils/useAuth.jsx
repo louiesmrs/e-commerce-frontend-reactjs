@@ -41,10 +41,7 @@ export const AuthProvider = ({children}) => {
         })
         .then((res) => {
            setShouldSubmit(true);
-           console.log(values.email);
-           console.log(res);
            setUser({email:values.email, admin:res.data});
-           console.log(user);
            setIsLoggedIn(true);
         })
         .catch(function (error) {
@@ -74,7 +71,8 @@ export const AuthProvider = ({children}) => {
   useEffect(() => {
     if (Object.values(errors)[0] === "" && Object.values(errors)[1] === ""  && shouldSubmit) {
       openNotificationWithIcon();
-      setValues('');
+      setValues("");
+      setShouldSubmit(false);
     }
   }, [errors, shouldSubmit]);
 

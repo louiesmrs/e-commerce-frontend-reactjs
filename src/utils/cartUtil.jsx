@@ -4,8 +4,8 @@ import { createContext, useState, useEffect } from 'react'
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
-   
+  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []);
+  const [isChekedout, setIsCheckedOut] = useState(false);
   const addToCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.name === item.name && cartItem.selectedSize === item.selectedSize);
         if (isItemInCart) {
@@ -74,6 +74,10 @@ export const CartProvider = ({ children }) => {
     return Math.round(cartItems.reduce((total, item) => total + item.price * item.quantity, 0) * 100) / 100;
   };
 
+  const checkout = () => {
+    setIsCheckedOut(!checkout);
+  }
+
   useEffect(() => {
     const data = localStorage.getItem('cartItems');
     if (data) {
@@ -93,7 +97,9 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         clearCart,
         getCartTotal,
-        getNumberInCart
+        getNumberInCart,
+        isChekedout, 
+        checkout,
       }}
     >
       {children}

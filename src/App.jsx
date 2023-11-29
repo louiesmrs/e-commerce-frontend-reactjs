@@ -10,6 +10,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Profile from './pages/Profile/Profile';
 import Sell from './pages/Sell/Sell';
+import CheckoutSuccess from './pages/CheckoutSuccess/CheckoutSuccess';
 function App() {
   return (
     <Suspense fallback={null}>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Register" element={<Register />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/Sell" element={<Sell />}></Route>
+          <Route path="success" element={<CheckoutSuccess />}></Route>
         </Routes>
    </Suspense>
       
