@@ -14,6 +14,15 @@ export const useForm = ( validate, type ) => {
     });
   };
 
+  const openNotificationRegistrationFailed = () => {
+    notification.open({
+      message: "Failure",
+      description: "Email has already been registered to an account. Please log in",
+      placement: "topLeft",
+    });
+  };
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(validate(values));
@@ -28,6 +37,10 @@ export const useForm = ( validate, type ) => {
           setShouldSubmit(true);
         })
         .catch(function (error) {
+            if(error.response && type == "addUser") {
+              openNotificationRegistrationFailed();
+              setValues("");
+            }
             // handle error
             console.log(error);
           });

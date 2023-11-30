@@ -21,6 +21,14 @@ export const AuthProvider = ({children}) => {
     });
   };
 
+  const openLogginFailnottif = () => {
+    notification.open({
+      message: "Failure",
+      description: "Account is not registered. Please register first to log in",
+      placement: "topLeft",
+    });
+  };
+
   const notificationLogout = () => {
     notification.open({
       message: "Success",
@@ -45,6 +53,9 @@ export const AuthProvider = ({children}) => {
            setIsLoggedIn(true);
         })
         .catch(function (error) {
+            if(error.response) {
+                openLogginFailnottif();
+            }
             // handle error
             console.log(error);
           });
@@ -89,7 +100,7 @@ export const AuthProvider = ({children}) => {
     const data = localStorage.getItem('user');
     if (data) {
       setUser(JSON.parse(data));
-    }
+    } 
   }, []);
 
   useEffect(() => {

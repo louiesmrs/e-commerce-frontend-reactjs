@@ -54,7 +54,7 @@ const LoginBlock = () => {
                 </Grid.Column>
                 <Grid.Column span={24}>
                     <input className="ui"
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder="Your Password"
                     value={values.password || ""}

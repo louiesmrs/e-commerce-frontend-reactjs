@@ -3,24 +3,18 @@ import "./Profile.css"
 import { useEffect, useState, useContext} from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import { AuthContext } from "../../utils/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 function Profile() {
     const [showProfile, setProfile] = useState(false);
     const { user, logout, isLoggedIn } = useContext(AuthContext);
-    const navigate = useNavigate();
     useEffect(() => {
         if (user.email) {
             setProfile(true);
+        } else {
+            setProfile(false);
         }
     }, [user]);
-    useEffect(() => {
-        console.log(isLoggedIn);
-        console.log(user);
-        if(!isLoggedIn) {
-            navigate(`/login`);
-        }
-    }, [isLoggedIn]);
-
+   
     let profileItem;
     if(showProfile) {
         profileItem = 
@@ -35,8 +29,11 @@ function Profile() {
             >Logout</button>
         </>;
     } else {
-        profileItem = 
+        profileItem =
+        <>
             <h1>You are not logged in</h1>
+            <Link to="/login"><button className="login">Login Here</button></Link>
+        </> 
     }
     
     return (
