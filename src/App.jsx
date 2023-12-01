@@ -24,7 +24,7 @@ function App() {
           <Route path="/Register" element={<Register />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/Sell" element={<Sell />}></Route>
-          <Route path="success" element={<CheckoutSuccess />}></Route>
+          <Route path="/success" element={<CheckoutSuccess />}></Route>
         </Routes>
    </Suspense>
       

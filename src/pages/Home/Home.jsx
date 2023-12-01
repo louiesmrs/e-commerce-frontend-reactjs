@@ -1,8 +1,8 @@
 
 import { Suspense, lazy } from 'react';
 const ProductBlock = lazy(() => import("../../components/ProductBlock/ProductBlock"));
-function Home() {
 
+function Home() {
     return (    
         <Suspense fallback={<Loading />}>
             <ProductBlock/>

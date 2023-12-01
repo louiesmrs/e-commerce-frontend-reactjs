@@ -12,7 +12,7 @@ import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
 const Cart = () => {
     const [shouldSubmit, setShouldSubmit] = useState(false);
-    const { cartItems, clearCart, getCartTotal, checkout } = useContext(CartContext);
+    const { cartItems, clearCart, getCartTotal, checkout, isCheckedOut } = useContext(CartContext);
     const [values, setValues] = useState({});
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -32,19 +32,24 @@ const Cart = () => {
             </>
         );
     };
+
+   
     const Checkout = (event) => {
         event.preventDefault();
         console.log(errors);
         console.log(values);
         setErrors(validate(values));
-        const url = `http://localhost:8080/onlineshop/addOrder`;
-        if (Object.keys(values).length === 2 && Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
+        setValues({...values, items:cartItems.map(order => order.name + " " + order.selectedSize + " " + order.quantity), total:getCartTotal()})
+        console.log(Object.keys(values).length);
+        const url = `http://localhost:8080/online-shop/addOrder`;
+        if (Object.keys(values).length === 4 && Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
             axios
                 .post(url, {
-                cartItems,
+                ...values,
                 })
                 .then(() => {
                 setShouldSubmit(true);
+                checkout();
                 })
                 .catch(function (error) {
                     // handle error
@@ -56,8 +61,8 @@ const Cart = () => {
         if (shouldSubmit) {
           setValues("");
           openCheckoutNotficiation();
+          clearCart();
           navigate(`/success`);
-          checkout();
         }
       }, [shouldSubmit]);
     
@@ -76,6 +81,8 @@ const Cart = () => {
           placement: "topLeft",
         });
       };
+
+      
      return (
         <div className="cart">
             <Navbar  />

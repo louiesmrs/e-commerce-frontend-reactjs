@@ -108,7 +108,12 @@ export const AuthProvider = ({children}) => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]); 
 
-
+  useEffect(() => {
+    if(localStorage.getItem('user').email !== undefined) {
+        setIsLoggedIn(true);
+    }
+    console.log(isLoggedIn);
+  }, [isLoggedIn]); 
 
   return (
     <AuthContext.Provider

@@ -75,7 +75,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const checkout = () => {
-    setIsCheckedOut(!checkout);
+    setIsCheckedOut(current => !current);
   }
 
   useEffect(() => {
@@ -88,6 +88,10 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]); // Include cartItems as a dependency here
+
+  useEffect(() => {
+    console.log(isChekedout);
+  }, [isChekedout]); // Include cartItems as a dependency here
 
   return (
     <CartContext.Provider

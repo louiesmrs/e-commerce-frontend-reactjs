@@ -1,11 +1,12 @@
 
 import { Container, Grid, Button} from "semantic-ui-react";
-import { useForm } from "../../utils/useForm";
 import "./SellBlock.css"
 import Navbar from "../../components/Navbar/Navbar";
 import validate from "../../utils/ValidateProduct";
 import { useEffect, useState } from "react";
 import { notification } from "antd";
+import axios from "axios";
+
 function SellBlock() {
     const [sizeString, setSizeString] = useState({
         small:0,
@@ -13,26 +14,82 @@ function SellBlock() {
         large:0,
         x_large:0
     });
+    const [shouldSubmit, setShouldSubmit] = useState(false);
+    const [values, setValues] = useState({});
+    const [errors, setErrors] = useState({});
+    const handleChange = (event) => {
+        event.persist();
+        setValues((values) => ({
+            ...values,
+            [event.target.name]: event.target.value,
+        }));
+        setErrors((errors) => ({ ...errors, [event.target.name]: "" }));
+        };
 
+    function handleFile(e) {
+        if (e.target.files && e.target.files[0]) setValues((values) => ({
+            ...values,
+            [values.image]: e.target.files[0],
+        }));
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        setErrors(validate(values));
+        if (Object.keys(values).length === 4 && Object.values(errors)[0] === ""
+         && Object.values(errors)[1] === "" && Object.values(errors)[2] === "" && Object.values(errors)[3] === "") {
+            const formData = new FormData();
+            formData.append("image", values.image);
+            formData.append("name", values.name);
+            formData.append("price", values.price);
+            formData.append("sizes", values.sizes);
+            axios({
+                method: 'post',
+                url: '',
+                data: formData,
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+            then(() => {
+                setShouldSubmit(true);
+                })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });  
+        }
+      }
+
+          
 
     useEffect(() => {
-        console.log(Object.values(sizeString).every(x => x === 0));
-        console.log(Object.values(sizeString).join(' '));
         if(!Object.values(sizeString).every(x => x === 0)) {
          values.sizes = Object.values(sizeString).join(' ');
         }
         console.log(sizeString);
     });
-    const { values, errors, handleChange, handleSubmit } = useForm(
-        validate, "addProduct", 3
-      );
+    
+    useEffect(() => {
+        if (shouldSubmit) {
+          setValues("");
+          openCheckoutNotficiation();
+        }
+      }, [shouldSubmit]);
+    
+      const openCheckoutNotficiation = () => {
+        notification.open({
+          message: "Success",
+          description: "Your order was successful",
+          placement: "topLeft",
+        });
+      };
 
-    
-    
-    {
-        // admin@tcd.ie
-        // admin
-    }
+    const openNotificationWithIcon = () => {
+        notification.open({
+          message: "Success",
+          description: "Your cart has been cleared!",
+          placement: "topLeft",
+        });
+      };
     const ValidationType = ({ type }) => {
         const ErrorMessage = errors[type];
         return (
@@ -126,6 +183,17 @@ function SellBlock() {
                     placeholder="Price of Product"
                     value={values.price || ""}
                     onChange={handleChange}
+                    />
+                    <ValidationType type="price" />
+                </Grid.Column>
+                <Grid.Column span={24}>
+                    <input className="ui"
+                    type="file"
+                    name="Image"
+                    accept="image/jpeg, image/png"
+                    placeholder="Single Image of Product"
+                    value={values.image || ""}
+                    onChange={handleFile}
                     />
                     <ValidationType type="price" />
                 </Grid.Column>

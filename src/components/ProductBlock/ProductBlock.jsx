@@ -4,11 +4,18 @@ import Product from "../../components/Product/Product";
 import reactLogo from "../../assets/react.svg";
 import Navbar from "..//Navbar/Navbar";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CartContext } from '../../utils/cartUtil';
 
 const ProductBlock = () => {
     const [products, setProducts] = useState([]);
     const [input, setInput] = useState('');
+    const { checkout, isCheckedOut } = useContext(CartContext);
+    useEffect(() => {
+        if(isCheckedOut) {
+            checkout();
+        }
+    }, [])
     
     const url = "http://localhost:8080/online-shop/products";
     useEffect(() => {
