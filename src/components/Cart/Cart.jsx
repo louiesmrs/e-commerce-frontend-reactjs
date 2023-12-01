@@ -93,7 +93,6 @@ const Cart = () => {
                         return (
                             <Grid.Column stretched key={index}>
                                 <CheckoutProduct
-                                    id={product._id}
                                     key={index}
                                     name={product.name}
                                     price={product.price}

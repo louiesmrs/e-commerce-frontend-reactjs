@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { createContext, useState, useEffect } from 'react'
-
+import _ from "lodash";
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
             if(checkSelectedSize(isItemInCart)){
                 setCartItems(
                     cartItems.map((cartItem) =>
-                    cartItem.name === item.name
+                        (cartItem.name === item.name && cartItem.selectedSize === item.selectedSize)
                         ? { ...cartItem, quantity: cartItem.quantity + 1 }
                         : cartItem
                     )
@@ -21,7 +21,11 @@ export const CartProvider = ({ children }) => {
                 return false;
             }
         } else {
-        setCartItems([...cartItems, { ...item, quantity: 1 }]);
+            if(checkNoneLeft(item)) {
+                 setCartItems([...cartItems, { ...item, quantity: 1 }]);
+            } else {
+                return false;
+            }
         }
         return true;
         };
@@ -46,15 +50,36 @@ export const CartProvider = ({ children }) => {
     return numberAvailable > item.quantity;
 }
 
-  const removeFromCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.name === item.name);
+const checkNoneLeft = (item) => {
+    console.log(item);
+    let numberAvailable;
+    const sizeArray = item.sizes.split(" ");
+    switch(item.selectedSize) {
+        case "s":
+            numberAvailable = sizeArray[0];
+        break;
+        case "m":
+            numberAvailable = sizeArray[1];
+        break;
+        case "l":
+            numberAvailable = sizeArray[2];
+        break;
+        case "xl":
+            numberAvailable = sizeArray[3];
+        break; 
+    }
+    return numberAvailable > 0;
+}
+    
 
+  const removeFromCart = (item) => {
+    const isItemInCart = cartItems.find((cartItem) => cartItem.name === item.name && cartItem.selectedSize === item.selectedSize);
     if (isItemInCart.quantity === 1) {
-      setCartItems(cartItems.filter((cartItem) => cartItem.name !== item.name));
+      setCartItems(cartItems.filter((cartItem) => (!_.isEqual(cartItem, item))));
     } else {
       setCartItems(
         cartItems.map((cartItem) =>
-          cartItem.name === item.name
+          (cartItem.name === item.name && cartItem.selectedSize === item.selectedSize)
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         )

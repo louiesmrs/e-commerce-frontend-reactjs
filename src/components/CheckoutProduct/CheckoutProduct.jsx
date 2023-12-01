@@ -8,7 +8,6 @@ function CheckoutProduct( props ) {
     const { addToCart, removeFromCart } = useContext(CartContext);
     const [product, setProduct] = useState(
         {
-            _id:props.id,
             name:props.name,
             price:props.price,
             sizes:props.sizes,

@@ -15,7 +15,7 @@ const CheckoutSuccess = () => {
           If you have any questions, please contact us here
             <Link to="/Contact" className='link'> Contact</Link>          
         </p>
-        <Link href="/">
+        <Link to="/home">
           <button type="button" width="300px" className="btn">
             Continue Shopping
           </button>

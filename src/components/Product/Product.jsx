@@ -8,7 +8,6 @@ function Product( props ) {
     const { addToCart } = useContext(CartContext);
     const [product, setProduct] = useState(
         {
-            _id:props.id,
             name:props.name,
             price:props.price,
             selectedSize: 's',

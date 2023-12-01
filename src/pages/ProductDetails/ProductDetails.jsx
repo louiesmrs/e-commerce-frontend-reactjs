@@ -1,4 +1,4 @@
-import { useState, useContext} from "react";
+import { useState, useContext, useEffect} from "react";
 import "./ProductDetails.css"
 import reactLogo from "../../assets/react.svg";
 import Navbar from "../../components/Navbar/Navbar";
@@ -9,17 +9,28 @@ import { CartContext } from "../../utils/cartUtil";
 function ProductDetails() {
     const title = useParams();
     const { addToCart } = useContext(CartContext);
+    
     const [product, setProduct] = useState(
         {
             name:'',
             price:'',
             sizes:'',
-            _id:'',
             selectedSize: 's',
 
         }
     );
-    
+    useEffect(() => {
+        const url = `http://localhost:8080/online-shop/product/${title.title}`;
+        axios
+            .get(url)
+            .then((response) => {
+                setProduct({...product, name:response.data.name, price:response.data.price, sizes:response.data.sizes});
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+                });
+    }, )
     const handleClick = () => {
         if(addToCart(product)) {
             openNotificationSuccess();
@@ -42,16 +53,7 @@ function ProductDetails() {
         });
       };
     
-    const url = `http://localhost:8080/online-shop/product/${title.title}`;
-    axios
-        .get(url)
-        .then((response) => {
-            setProduct({...product, name:response.data.name, price:response.data.price, sizes:response.data.sizes, _id:response.data._id});
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-            });
+    
     const sizeArray = product.sizes.split(" ");
    
     
@@ -69,7 +71,6 @@ function ProductDetails() {
                         {product.price}$
                     </div>
                     <select className="product-select" value={product.selectedSize} onChange={e => setProduct({...product,selectedSize:e.target.value})}>
-                            <option>Select Size</option>
                             <option value="s">S &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[0]} remaining</option>
                             <option value="m">M &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[1]} remaining</option>
                             <option value="l">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[2]} remaining</option>

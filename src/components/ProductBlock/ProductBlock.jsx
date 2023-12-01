@@ -65,7 +65,6 @@ const ProductBlock = () => {
                             <Grid.Column stretched key={index}>
                                 <Product
                                     key={index}
-                                    id={product._id}
                                     name={product.name}
                                     price={product.price}
                                     image={reactLogo}
