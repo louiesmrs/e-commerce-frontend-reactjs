@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { notification } from "antd";
 import { CartContext } from "../../utils/cartUtil";
+import { Select } from 'antd'
 function ProductDetails() {
     const title = useParams();
     const { addToCart } = useContext(CartContext);
-    
     const [product, setProduct] = useState(
         {
             name:'',
@@ -19,6 +19,8 @@ function ProductDetails() {
 
         }
     );
+
+   
     useEffect(() => {
         const url = `http://localhost:8080/online-shop/product/${title.title}`;
         axios
@@ -38,6 +40,8 @@ function ProductDetails() {
             openNotificationFail();
         }
     }
+
+    
     const openNotificationSuccess = () => {
         notification.open({
           message: "Success",
@@ -53,9 +57,11 @@ function ProductDetails() {
         });
       };
     
-    
+    const handleChange = (value) => {
+        setProduct({...product, selectedSize: value});
+    }
     const sizeArray = product.sizes.split(" ");
-   
+  
     
     return (
         <div className="home">
@@ -70,12 +76,17 @@ function ProductDetails() {
                     <div className="product-price">
                         {product.price}$
                     </div>
-                    <select className="product-select" value={product.selectedSize} onChange={e => setProduct({...product,selectedSize:e.target.value})}>
-                            <option value="s">S &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[0]} remaining</option>
-                            <option value="m">M &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[1]} remaining</option>
-                            <option value="l">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[2]} remaining</option>
-                            <option value="xl">XL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[3]} remaining</option>
-                        </select>
+                    <Select
+                        className="product-select"
+                        defaultValue="Small"
+                        onChange={handleChange}
+                        options={[
+                            { value: 's', label: 'Small '  + sizeArray[0] + ' remaining'},
+                            { value: 'm', label: 'Medium ' + sizeArray[1] + ' remaining' },
+                            { value: 'l', label: 'Large ' + sizeArray[2] + ' remaining' },
+                            { value: 'xl', label: 'Extra Large ' + sizeArray[3] + ' remaining'},
+                        ]}
+                         />
                     <button className="add-to-cart-button" onClick={handleClick}>Add to Cart</button>
              </div>
         </div>
@@ -84,3 +95,13 @@ function ProductDetails() {
     );
 }
 export default ProductDetails;
+
+
+{
+//     <select className="product-select" value={product.selectedSize} onChange={handleChange}>
+//     <option value="s">S &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[0]} remaining</option>
+//     <option value="m">M &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[1]} remaining</option>
+//     <option value="l">L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[2]} remaining</option>
+//     <option value="xl">XL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sizeArray[3]} remaining</option>
+// </select>
+}

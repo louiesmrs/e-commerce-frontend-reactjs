@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types'
 import { createContext, useState, useEffect } from 'react'
-import _ from "lodash";
+
+
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []);
   const [isChekedout, setIsCheckedOut] = useState(false);
+  const [counter, setCounter] = useState(0);
   const addToCart = (item) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.name === item.name && cartItem.selectedSize === item.selectedSize);
         if (isItemInCart) {
@@ -22,6 +24,8 @@ export const CartProvider = ({ children }) => {
             }
         } else {
             if(checkNoneLeft(item)) {
+                 item.cartID = counter;
+                 setCounter(current => current + 1)
                  setCartItems([...cartItems, { ...item, quantity: 1 }]);
             } else {
                 return false;
@@ -73,9 +77,11 @@ const checkNoneLeft = (item) => {
     
 
   const removeFromCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.name === item.name && cartItem.selectedSize === item.selectedSize);
+    console.log(cartItems);
+    const isItemInCart = cartItems.find((cartItem) => (cartItem.name === item.name && cartItem.selectedSize === item.selectedSize));
+    console.log(isItemInCart);
     if (isItemInCart.quantity === 1) {
-      setCartItems(cartItems.filter((cartItem) => (!_.isEqual(cartItem, item))));
+      setCartItems(cartItems.filter((cartItem) => (cartItem.name !== item.name || cartItem.selectedSize !== item.selectedSize)));
     } else {
       setCartItems(
         cartItems.map((cartItem) =>
@@ -89,6 +95,7 @@ const checkNoneLeft = (item) => {
 
   const clearCart = () => {
     setCartItems([]);
+    setCounter(0);
   };
 
   const getNumberInCart = () => {
