@@ -3,9 +3,11 @@ import { Container, Grid, Button} from "semantic-ui-react";
 import "./SellBlock.css"
 import Navbar from "../../components/Navbar/Navbar";
 import validate from "../../utils/ValidateProduct";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef} from "react";
 import { notification } from "antd";
 import axios from "axios";
+import { UploadOutlined } from '@ant-design/icons';
+
 
 function SellBlock() {
     const [sizeString, setSizeString] = useState({
@@ -17,6 +19,7 @@ function SellBlock() {
     const [shouldSubmit, setShouldSubmit] = useState(false);
     const [values, setValues] = useState({});
     const [errors, setErrors] = useState({});
+    const inputRef = useRef(null);
     const handleChange = (event) => {
         event.persist();
         setValues((values) => ({
@@ -33,7 +36,10 @@ function SellBlock() {
             [e.target.name]: e.target.files[0],
         }));
     }
-
+    const handleUploadClick = (e) => {
+        e.preventDefault();
+        inputRef.current?.click();
+      };
    
 
     const handleSubmit = (e) => {
@@ -187,14 +193,21 @@ function SellBlock() {
                     <ValidationType type="price" />
                 </Grid.Column>
                 <Grid.Column span={24}>
-                    <input className="ui"
-                    type="file"
-                    name="image"
-                    accept="image/jpeg, image/png"
-                    placeholder="Single Image of Product"
-                    value={""}
-                    onChange={handleFile}
-                    />
+                <div>
+                        <Button className="product__button" onClick={(e) => handleUploadClick(e)}>Choose Image</Button>
+                        <h3>{values.image ?`${values.image.name}` : 'Nothing selected'}</h3>
+                        <input className="ui"
+                            type="file"
+                            name="image"
+                            accept="image/jpeg, image/png"
+                            placeholder="Single Image of Product"
+                            value={""}
+                            onChange={handleFile}
+                            ref={inputRef}
+                            hidden
+                            />
+                        </div>
+                    
                 </Grid.Column>
                 <div className="buttons">
                 <Button

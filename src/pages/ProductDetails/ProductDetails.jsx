@@ -74,7 +74,6 @@ function ProductDetails() {
                 </div>
                 <div className="product-info-container">
                     <h1>{title.title}</h1>
-                    <p className="product-description"> This is the description </p>
                     <div className="product-price">
                         {product.price}$
                     </div>
