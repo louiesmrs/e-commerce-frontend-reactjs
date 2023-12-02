@@ -67,7 +67,7 @@ const ProductBlock = () => {
                                     key={index}
                                     name={product.name}
                                     price={product.price}
-                                    image={reactLogo}
+                                    image={product.image}
                                     sizes={product.sizes}
                                 ></Product>
                             </Grid.Column>

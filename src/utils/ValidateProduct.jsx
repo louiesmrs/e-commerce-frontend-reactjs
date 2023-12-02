@@ -12,7 +12,7 @@ function ValidateProduct({ name, price, sizes}) {
       }
       if (!price) {
         errorsList.price = "Price is required";
-      } else if(!/^\d+$/.test(price)) {
+      } else if(!/^\$?[0-9]+(\.[0-9][0-9])?$/.test(price)) {
         errorsList.price = "Price must be a number";
       }
       if (sizes === "0 0 0 0") {

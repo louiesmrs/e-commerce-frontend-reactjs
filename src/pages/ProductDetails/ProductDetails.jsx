@@ -16,6 +16,7 @@ function ProductDetails() {
             price:'',
             sizes:'',
             selectedSize: 's',
+            image:''
 
         }
     );
@@ -26,13 +27,14 @@ function ProductDetails() {
         axios
             .get(url)
             .then((response) => {
-                setProduct({...product, name:response.data.name, price:response.data.price, sizes:response.data.sizes});
+               
+                setProduct({...product, name:response.data.name, price:response.data.price, sizes:response.data.sizes, image:response.data.image});
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
                 });
-    }, )
+    }, [product])
     const handleClick = () => {
         if(addToCart(product)) {
             openNotificationSuccess();
@@ -68,7 +70,7 @@ function ProductDetails() {
             <Navbar />
             <div className="product-detail-container">
                 <div className="product-image-container">
-                    <img src={reactLogo} alt="Product" />
+                    <img src={`data:image/jpeg;base64,${product.image}`} alt="Product" />
                 </div>
                 <div className="product-info-container">
                     <h1>{title.title}</h1>

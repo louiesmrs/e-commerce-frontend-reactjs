@@ -27,17 +27,22 @@ function SellBlock() {
         };
 
     function handleFile(e) {
+        e.persist();
         if (e.target.files && e.target.files[0]) setValues((values) => ({
             ...values,
-            [values.image]: e.target.files[0],
+            [e.target.name]: e.target.files[0],
         }));
     }
 
-    function handleSubmit(e) {
+   
+
+    const handleSubmit = (e) => {
         e.preventDefault();
         setErrors(validate(values));
+        console.log(values);
+        console.log(errors);
         if (Object.keys(values).length === 4 && Object.values(errors)[0] === ""
-         && Object.values(errors)[1] === "" && Object.values(errors)[2] === "" && Object.values(errors)[3] === "") {
+         && Object.values(errors)[1] === "") {
             const formData = new FormData();
             formData.append("image", values.image);
             formData.append("name", values.name);
@@ -45,28 +50,30 @@ function SellBlock() {
             formData.append("sizes", values.sizes);
             axios({
                 method: 'post',
-                url: '',
+                url: 'http://localhost:8080/online-shop/addProductImage',
                 data: formData,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
-            then(() => {
+            .then(() => {
                 setShouldSubmit(true);
                 })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             });  
+            
         }
       }
 
-          
 
     useEffect(() => {
+        console.log(sizeString);
+        console.log(values.sizes);
         if(!Object.values(sizeString).every(x => x === 0)) {
-         values.sizes = Object.values(sizeString).join(' ');
+            values.sizes = Object.values(sizeString).join(' ');
         }
         console.log(sizeString);
-    });
+    }, [sizeString]);
     
     useEffect(() => {
         if (shouldSubmit) {
@@ -78,18 +85,11 @@ function SellBlock() {
       const openCheckoutNotficiation = () => {
         notification.open({
           message: "Success",
-          description: "Your order was successful",
+          description: "Your product post was successful",
           placement: "topLeft",
         });
       };
 
-    const openNotificationWithIcon = () => {
-        notification.open({
-          message: "Success",
-          description: "Your cart has been cleared!",
-          placement: "topLeft",
-        });
-      };
     const ValidationType = ({ type }) => {
         const ErrorMessage = errors[type];
         return (
@@ -189,13 +189,12 @@ function SellBlock() {
                 <Grid.Column span={24}>
                     <input className="ui"
                     type="file"
-                    name="Image"
+                    name="image"
                     accept="image/jpeg, image/png"
                     placeholder="Single Image of Product"
-                    value={values.image || ""}
+                    value={""}
                     onChange={handleFile}
                     />
-                    <ValidationType type="price" />
                 </Grid.Column>
                 <div className="buttons">
                 <Button
