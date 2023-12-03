@@ -92,7 +92,6 @@ const checkNoneLeft = (item) => {
 
   const clearCart = () => {
     setCartItems([]);
-    setCounter(0);
   };
 
   const getNumberInCart = () => {

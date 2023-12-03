@@ -14,6 +14,7 @@
     height: 230px;
     object-fit: contain;
     margin-left: 5px;
+    border: 10px solid #008CBA;
 }
 
 .product__footer{

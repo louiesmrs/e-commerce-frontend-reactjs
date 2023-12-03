@@ -26,6 +26,7 @@ export const useForm = ( validate, type ) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(validate(values));
+    console.log(values);
     // Your url for API
     const url = `http://localhost:8080/online-shop/${type}`;
     if (Object.keys(values).length === 3) {
@@ -70,6 +71,7 @@ export const useForm = ( validate, type ) => {
     handleSubmit,
     values,
     errors,
-    shouldSubmit
+    shouldSubmit,
+    setValues
   };
 };

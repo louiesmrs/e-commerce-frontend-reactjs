@@ -1,7 +1,7 @@
 
 import { Button, Form, Icon, Message } from 'semantic-ui-react'
 import { useForm } from "../../utils/useForm";
-import validate from "../../utils/ValidateRegister";
+import validate from "../../utils/ValidateLogin";
 import Navbar from "..//Navbar/Navbar";
 import './RegisterBlock.css'
 import {
@@ -12,17 +12,19 @@ import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../utils/useAuth';
 import { useNavigate } from "react-router-dom";
 const RegisterBlock = () => {
-    const { values, errors, handleChange, handleSubmit, shouldSubmit } = useForm(
+    const { values, errors, handleChange, handleSubmit, shouldSubmit, setValues} = useForm(
         validate, "addUser"
       );
     const navigate = useNavigate();
     const { register, isLoggedIn } = useContext(AuthContext);
 
     useEffect(() => {
-        console.log(values.email);
-        console.log(values.admin);
-        if(shouldSubmit) {
-            register(values.email, values.admin);
+        console.log(shouldSubmit);
+        console.log(Object.values(errors)[0]);
+        setValues({...values, admin:false});
+        console.log(Object.values(errors)[1]);
+        if(shouldSubmit && Object.values(errors)[0] === "" ) {
+            register(values.email);
         }
     }, [shouldSubmit])
 
@@ -33,9 +35,6 @@ const RegisterBlock = () => {
         }
     }, [isLoggedIn]);
 
-    useEffect(() => {
-        values.admin = false;
-    }, [values.admin])
       
     const ValidationType = ({ type }) => {
     const ErrorMessage = errors[type];
@@ -78,7 +77,6 @@ const RegisterBlock = () => {
                     />
                 <ValidationType type="password" />
             </Form.Group>
-            <p>Passwords must contain 1 number and 1 special character and between 6-16 characters</p>
             <Button className='submit' color='blue' onClick={handleSubmit}>Submit</Button>
             <LoginOutlined />
             </Form>

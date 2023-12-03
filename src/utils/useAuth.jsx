@@ -10,6 +10,7 @@ export const AuthProvider = ({children}) => {
   const [errors, setErrors] = useState({});
   const [shouldSubmit, setShouldSubmit] = useState(false);
   const [user, setUser] = useState(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {});
+  const [response, setRespones] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { clearCart } = useContext(CartContext);
 
@@ -49,8 +50,7 @@ export const AuthProvider = ({children}) => {
         })
         .then((res) => {
            setShouldSubmit(true);
-           setUser({email:values.email, admin:res.data});
-           setIsLoggedIn(true);
+           setRespones(res.data);
         })
         .catch(function (error) {
             if(error.response) {
@@ -70,10 +70,9 @@ export const AuthProvider = ({children}) => {
     clearCart();
 }
 {
-  const register = ( regEmail, regAdmin ) => {
-    console.log(regAdmin);
+  const register = ( regEmail ) => {
     console.log(regEmail);
-    setUser({email:regEmail, admin:regAdmin});
+    setUser({email:regEmail, admin:false});
     openNotificationWithIcon();
     setIsLoggedIn(true);
   }
@@ -84,6 +83,8 @@ export const AuthProvider = ({children}) => {
       openNotificationWithIcon();
       setValues("");
       setShouldSubmit(false);
+      setUser({email:values.email, admin:response});
+      setIsLoggedIn(true);
     }
   }, [errors, shouldSubmit]);
 

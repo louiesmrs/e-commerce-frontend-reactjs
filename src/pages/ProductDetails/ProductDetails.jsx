@@ -34,7 +34,7 @@ function ProductDetails() {
                 // handle error
                 console.log(error);
                 });
-    }, [product])
+    }, [])
     const handleClick = () => {
         if(addToCart(product)) {
             openNotificationSuccess();

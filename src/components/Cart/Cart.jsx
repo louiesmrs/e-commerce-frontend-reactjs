@@ -32,23 +32,26 @@ const Cart = () => {
             </>
         );
     };
+    
+    useEffect(() => {
+        setValues({...values, items:cartItems.map(order => order.name + " " + order.selectedSize + " " + order.quantity), total:getCartTotal()});
+    }, [cartItems]);
 
-   
-    const Checkout = (event) => {
-        event.preventDefault();
-        console.log(errors);
+    
+    const Checkout = (event) => {    
+        event.preventDefault();    
         console.log(values);
         setErrors(validate(values));
-        setValues({...values, items:cartItems.map(order => order.name + " " + order.selectedSize + " " + order.quantity), total:getCartTotal()})
+        console.log(errors);
         console.log(Object.keys(values).length);
         const url = `http://localhost:8080/online-shop/addOrder`;
-        if (Object.keys(values).length === 4 && Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
+        if (Object.keys(values).length === 4) {
             axios
                 .post(url, {
                 ...values,
                 })
                 .then(() => {
-                setShouldSubmit(true);
+                    setShouldSubmit(true);
                 checkout();
                 })
                 .catch(function (error) {
@@ -57,8 +60,9 @@ const Cart = () => {
                 });  
         }
     }
+    
     useEffect(() => {
-        if (shouldSubmit) {
+        if (shouldSubmit  && Object.values(errors)[0] === "" && Object.values(errors)[1] === "") {
           setValues("");
           openCheckoutNotficiation();
           clearCart();
@@ -151,7 +155,9 @@ const Cart = () => {
                     <button
                         className="checkout-button"
                         onClick={(e) => {
-                        Checkout(e);
+                            setErrors(validate(values));
+                            setValues({...values, items:cartItems.map(order => order.name + " " + order.selectedSize + " " + order.quantity), total:getCartTotal()})
+                            Checkout(e);
                         }}
                     >
                         Checkout

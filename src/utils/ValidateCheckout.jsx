@@ -15,7 +15,7 @@ function ValidateCheckout({ email, postcode }) {
       }
       if (!postcode) {
         errorsList.postcode = "Postcode is required";
-      } else if(!/(?:^[AC-FHKNPRTV-Y][0-9]{2}|D6W)[ -]?[0-9AC-FHKNPRTV-Y]{4}$/.test(postcode)) {
+      } else if(!/^[AC-Y]{1}[0-9]{1}[0-9W]{1}[ \-]?[0-9AC-Y]{4}$/.test(postcode)) {
         errorsList.postcode = "Postcode not valid";
       }
       return errorsList;
