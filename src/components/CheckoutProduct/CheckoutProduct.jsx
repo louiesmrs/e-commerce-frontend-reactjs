@@ -44,7 +44,7 @@ function CheckoutProduct( props ) {
                     <Link to={`/product/${props.name}`}>   
                     <Card >
                     
-                        <Image className="product__image" centered src={props.image} />
+                        <Image className="product__image" centered src={`data:image/jpeg;base64,${props.image}`} />
                         <Card.Content>
                         <Card.Header className="product__title">{props.name}</Card.Header>
                         <Card.Description>

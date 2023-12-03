@@ -6,6 +6,7 @@
 .product__title{
     color: #7c64be !important;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .product__image{
@@ -13,7 +14,10 @@
     height: 230px;
     object-fit: contain;
     margin-left: 5px;
+    border: 10px solid #008CBA;
 }
+
+ 
 
 .product__footer{
     text-align: center;
@@ -37,10 +41,11 @@
 .product__price{
     font-weight: bold;
     font-size: 1.3rem;
+    text-decoration: none;
 }
 
 .product__card{
     height: 100%;
+    text-decoration: none;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-   
 }

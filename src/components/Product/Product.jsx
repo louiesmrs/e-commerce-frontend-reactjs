@@ -12,6 +12,7 @@ function Product( props ) {
             price:props.price,
             selectedSize: 's',
             sizes:props.sizes,
+            image:props.image
             
         }
     );

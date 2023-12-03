@@ -70,7 +70,7 @@ function ProductDetails() {
             <Navbar />
             <div className="product-detail-container">
                 <div className="product-image-container">
-                    <img src={`data:image/jpeg;base64,${product.image}`} alt="Product" />
+                    <img src={`data:image/jpeg;base64,${product.image}`} alt="Product" className="product-image" />
                 </div>
                 <div className="product-info-container">
                     <h1>{title.title}</h1>

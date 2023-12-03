@@ -13,6 +13,13 @@
     justify-content: center;
   }
   
+  .product-image {
+     border: 10px solid #008CBA;
+  }
+  .product-image:hover {
+    transform: scale(1.5);
+  }
+  
   .product-image-container img {
     max-width: 100%;
     margin: 13px;

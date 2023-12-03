@@ -96,7 +96,7 @@ const Cart = () => {
                                     key={index}
                                     name={product.name}
                                     price={product.price}
-                                    image={reactLogo}
+                                    image={product.image}
                                     quantity={product.quantity}
                                     selectedSize={product.selectedSize}
                                     sizes={product.sizes}
