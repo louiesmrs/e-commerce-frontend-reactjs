@@ -85,6 +85,12 @@ function SellBlock() {
         if (shouldSubmit) {
           setValues("");
           openCheckoutNotficiation();
+          setSizeString({
+            small:0,
+            medium:0,
+            large:0,
+            x_large:0
+        });
         }
       }, [shouldSubmit]);
     

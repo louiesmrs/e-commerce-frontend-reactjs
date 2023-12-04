@@ -2,11 +2,19 @@
 
 Runs on http://localhost:5173/
 
-Must have Node.js
+## Requires Node.js
 
-First step: Run "npm install"
+### First Step `npm install`
 
-Second step: Run "npm run dev"
+To install dependencies.
+
+### Second Step `npm run dev`
+
+
+Runs the app in the development mode.\
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+
 
 
 Currently, two official plugins are available:
