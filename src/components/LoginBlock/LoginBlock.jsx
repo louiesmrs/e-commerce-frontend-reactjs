@@ -63,7 +63,6 @@ const LoginBlock = () => {
                     
                     <ValidationType type="password" />
                 </Grid.Column>
-                <p>Passwords must contain 1 number and 1 special character and between 6-16 characters</p>
                 <Button className="submit" onClick={handleSubmit}>{"Submit"}</Button>
                 <LoginOutlined />
                 </form>
