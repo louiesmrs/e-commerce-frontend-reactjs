@@ -4,6 +4,8 @@ Runs on http://localhost:5173
 
 Link to Frontend Video: https://media.heanet.ie/secure/file/d6eac4f0554a4d238d524473f967748a
 
+Admin login -> email: admin@tcd.ie / password: admin
+
 ## Requires Node.js
 
 ### First Step `npm install`
