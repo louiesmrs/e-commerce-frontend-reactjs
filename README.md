@@ -1,10 +1,11 @@
+Example Ecommerce Frontend. 
+Part of a group project where I wrote all the frontend code and part of the backend.
+Backend not included as it is not all my own work.
+
 # React + Vite
 
 Runs on http://localhost:5173
 
-Link to Frontend Video: https://media.heanet.ie/page/d6eac4f0554a4d238d524473f967748a
-
-Admin login -> email: admin@tcd.ie / password: admin
 
 ## Requires Node.js
 
@@ -18,8 +19,6 @@ To install dependencies.
 Runs the app in the development mode.\
 Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
-
-For Backend repository go to: https://gitlab.scss.tcd.ie/rmacgiol/sweng-group-27
 
 Currently, two official plugins are available:
 
